@@ -1,5 +1,7 @@
 'use strict';
 
+var data = require('./config.js');
+
 function handleError (err) {
   if(err) {
     console.log(err.toString());
@@ -11,13 +13,7 @@ var readTheFunctions = (function () {
 
   var mysql = require('mysql');
 
-  var con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'kiwitorta9',
-    database: 'calorie_counter'
-  });
-
+  var con = mysql.createConnection(data);
 
   con.connect();
 
