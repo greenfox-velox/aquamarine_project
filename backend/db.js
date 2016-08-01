@@ -9,6 +9,12 @@ function handleError (err) {
   }
 }
 
+var serverQueries = {
+    getMeals: 'SELECT * FROM meals',
+    postMeals: 'INSERT INTO meals SET ?',
+    deleteMeals: 'DELETE FROM meals WHERE id = ?'
+  };
+
 var readTheFunctions = (function () {
 
   var mysql = require('mysql');
@@ -18,7 +24,7 @@ var readTheFunctions = (function () {
   con.connect();
 
   function readAll (data, callback) {
-    con.query('SELECT * FROM meals;', function(err,rows){
+    con.query(serverQueries.getMeals, function(err,rows){
       handleError(err);
       callback(rows);
     });
@@ -26,7 +32,7 @@ var readTheFunctions = (function () {
 
   function createNewMeal(item, callback) {
     console.log(item);
-    con.query("INSERT INTO meals SET ?", item, function(err, rows){
+    con.query(serverQueries.postMeals, item, function(err, rows){
       handleError(err);
       console.log(rows);
       callback({id: rows.insertId, name: item.name, calories: item.calories, date: item.date})
@@ -34,7 +40,7 @@ var readTheFunctions = (function () {
   }
 
   function deleteCalorie(id, callback) {
-    con.query('DELETE FROM meals WHERE id = ?', id, function(err,rows){
+    con.query(serverQueries.deleteMeals, id, function(err,rows){
       handleError();
       callback({id: id});
     });
