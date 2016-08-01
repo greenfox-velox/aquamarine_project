@@ -12,8 +12,12 @@ app.use(bodyParser.json());
 app.use(express.static('../../angular_cc'));
 
 app.get('/meals', function(req, res) {
-  db.readAll(req, function(meal){
-    res.send(meal)
+  db.readAll(req, function(err, meal){
+    if (err) {
+      res.status(400).json(err);
+    } else {
+      res.send(meal)
+    }
   });
 })
 
@@ -23,17 +27,25 @@ app.post('/meals', function(req, res){
       calories: req.body.calories,
       date: req.body.date.split('T')[0]
   };
-  db.createNewMeal(item, function (meal){
-    res.send(meal);
+  db.createNewMeal(item, function (err, meal){
+    if (err) {
+      res.status(400).json(err);
+    } else {
+      res.send(meal);
+    }
   });
 })
 
 app.delete('/meals/:id', function(req, res){
-  db.deleteCalorie(req.params.id, function(meal){
+  db.deleteCalorie(req.params.id, function(err, meal){
     var item = {
       id: req.params.id
     }
-    res.send(item)
+    if (err) {
+      res.status(400).json(err);
+    } else {
+      res.send(item);
+    }
   });
 })
 
