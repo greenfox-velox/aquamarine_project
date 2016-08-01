@@ -14,8 +14,8 @@ var readTheFunctions = (function () {
   var con = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: 'solar``7',
-    database: 'caloriecounter'
+    password: 'kiwitorta9',
+    database: 'calorie_counter'
   });
 
 
@@ -28,14 +28,12 @@ var readTheFunctions = (function () {
     });
   }
 
-  function createNewMeal(req, callback) {
-    con.query("INSERT INTO meals (name, calories, date) VALUES ('"+ req.body.name +"','" +req.body.calories+ "', '"+req.body.date.split('T')[0]+"')", function(err,rows){
+  function createNewMeal(item, callback) {
+    console.log(item);
+    con.query("INSERT INTO meals SET ?", item, function(err, rows){
       handleError(err);
-      callback({
-        id: rows.insertId,
-        name: req.body.name,
-        calories: req.body.calories,
-        date: req.body.date})
+      console.log(rows);
+      callback({id: rows.insertId, name: item.name, calories: item.calories, date: item.date})
     });
   }
 

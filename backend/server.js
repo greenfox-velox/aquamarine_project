@@ -18,7 +18,12 @@ app.get('/meals', function(req, res) {
 })
 
 app.post('/meals', function(req, res){
-  db.createNewMeal(req, function (meal){
+  var item = {
+      name: req.body.name,
+      calories: req.body.calories,
+      date: req.body.date.split('T')[0]
+  };
+  db.createNewMeal(item, function (meal){
     res.send(meal);
   });
 })
