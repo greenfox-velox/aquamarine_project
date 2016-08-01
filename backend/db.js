@@ -26,7 +26,7 @@ var readTheFunctions = (function () {
   function readAll (data, callback) {
     con.query(serverQueries.getMeals, function(err,rows){
       handleError(err);
-      callback(rows);
+      callback(err, rows);
     });
   }
 
@@ -35,14 +35,14 @@ var readTheFunctions = (function () {
     con.query(serverQueries.postMeals, item, function(err, rows){
       handleError(err);
       console.log(rows);
-      callback({id: rows.insertId, name: item.name, calories: item.calories, date: item.date})
+      callback(err, {id: rows.insertId, name: item.name, calories: item.calories, date: item.date})
     });
   }
 
   function deleteCalorie(id, callback) {
     con.query(serverQueries.deleteMeals, id, function(err,rows){
       handleError();
-      callback({id: id});
+      callback(err, {id: id});
     });
   }
 
