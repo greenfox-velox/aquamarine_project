@@ -15,13 +15,9 @@
 }
 
 .form-group input.ng-untouched {
-  /*border: 2px solid #96DBF2;*/
   border: 2px solid #cccccc;
 }
 
-/*.form-group input.ng-touched {
-  border: 2px solid #cccccc;
-}*/
 
 .db-container tr.ng-enter{
   transition: 0.5s linear all;
