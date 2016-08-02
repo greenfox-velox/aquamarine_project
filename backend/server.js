@@ -9,7 +9,7 @@ var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
 
 app.use(bodyParser.json());
-app.use(express.static('../../angular_cc'));
+app.use(express.static('../../aquamarine_project'));
 
 app.get('/meals', function(req, res) {
   db.readAll(req, function(err, meal){
