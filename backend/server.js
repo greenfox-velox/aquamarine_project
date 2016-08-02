@@ -7,7 +7,7 @@ var app = express();
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.json());
-app.use(express.static('../../aquamarine_project'));
+app.use(express.static('../client'));
 
 app.get('/meals', function(req, res) {
   db.readAll(req, function(err, meal) {
