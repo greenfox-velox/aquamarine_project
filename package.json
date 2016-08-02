@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/szemannp/caloriecounter.git"
+    "url": ""
   },
   "author": "szp",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/szemannp/caloriecounter/issues"
+    "url": ""
   },
-  "homepage": "https://github.com/szemannp/caloriecounter#readme",
+  "homepage": "",
   "devDependencies": {
     "babel-eslint": "^6.1.2",
     "eslint": "^2.13.1",
