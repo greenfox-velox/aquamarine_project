@@ -9,7 +9,7 @@ uglify = require('gulp-uglify');
 //     .pipe(gulp.dest('minjs'))
 // });
 
-gulp.task('karmatest', function () {
+gulp.task('factorytest', function () {
 
 })
 

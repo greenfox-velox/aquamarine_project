@@ -34,13 +34,9 @@
     "karma": "^1.1.2",
     "karma-chrome-launcher": "^1.0.1",
     "karma-jasmine": "^1.0.2",
-<<<<<<< HEAD
     "nodemon": "^1.9.2",
     "supertest": "^2.0.0",
     "tape": "^4.6.0"
-=======
-    "nodemon": "^1.9.2"
->>>>>>> peet_tests
   },
   "dependencies": {
     "angular-animate": "^1.5.8",
