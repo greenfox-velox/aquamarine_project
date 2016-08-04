@@ -16,28 +16,22 @@ var serverQueries = {
 };
 
 var readTheFunctions = (function() {
-  var mysql = require('mysql');
-
-  var con = mysql.createConnection(config);
-
-  con.connect();
-
-  function readAll(data, callback) {
-    con.query(serverQueries.getMeals, function(err, rows) {
+  function readAll(data, connection, callback) {
+    connection.query(serverQueries.getMeals, function(err, rows) {
       handleError(err);
       callback(err, rows);
     });
   }
 
-  function createNewMeal(item, callback) {
-    con.query(serverQueries.postMeals, item, function(err, rows) {
+  function createNewMeal(item, connection, callback) {
+    connection.query(serverQueries.postMeals, item, function(err, rows) {
       handleError(err);
       callback(err, {id: rows.insertId, name: item.name, calories: item.calories, date: item.date});
     });
   }
 
-  function deleteCalorie(id, callback) {
-    con.query(serverQueries.deleteMeals, id, function(err) {
+  function deleteCalorie(id, connection, callback) {
+    connection.query(serverQueries.deleteMeals, id, function(err) {
       handleError();
       callback(err, {id: id});
     });
