@@ -6,10 +6,12 @@
     },
   "env": {                           // http://eslint.org/docs/user-guide/configuring.html#specifying-environments
     "browser": true,                 // browser global variables
-    "node": true,                     // Node.js global variables and Node.js-specific rules
+    "node": true,
+    "jasmine": true,                     // Node.js global variables and Node.js-specific rules
     },
   "globals": {
     "angular": true,
+    "inject": true,
     },
   "parser": "babel-eslint",          // https://github.com/babel/babel-eslint
   "plugins": [
@@ -130,7 +132,7 @@
       }],
     "comma-style": [2, "last"],      // http://eslint.org/docs/rules/comma-style
     "eol-last": 2,                   // http://eslint.org/docs/rules/eol-last
-    "func-names": 1,                 // http://eslint.org/docs/rules/func-names
+    "func-names": 0,                 // http://eslint.org/docs/rules/func-names
     "key-spacing": [2, {             // http://eslint.org/docs/rules/key-spacing
         "beforeColon": false,
         "afterColon": true
