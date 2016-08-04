@@ -3,7 +3,11 @@ var CalorieCounter = angular.module('CalorieCounter', []);
 CalorieCounter.directive('mealTable', function() {
   return {
     restrict: 'E',
-    templateUrl: '../mealtable.html'
+    templateUrl: '../mealtable.html',
+    transclude: true,
+    scope: {
+      meals: '='
+    }
   };
 });
 
@@ -30,6 +34,7 @@ CalorieCounter.factory('CalorieService', function(Config, $http) {
 
 CalorieCounter.controller('AppController', function($scope, $http, CalorieService) {
   $scope.meals = [];
+  $scope.tValue = 15;
 
   $scope.addMeal = function() {
     var newMeal = {
@@ -50,15 +55,21 @@ CalorieCounter.controller('AppController', function($scope, $http, CalorieServic
   };
 
   $scope.getSum = function() {
-    var sum = 0;
+    $scope.sum = 0;
     $scope.meals.forEach(function(meal) {
-      sum += meal.calories;
+      $scope.sum += meal.calories;
     });
-    return sum;
+    return $scope.sum;
   };
 
   $scope.reload = function() {
     $scope.search = '';
+  };
+
+  $scope.tSubject = function() {
+    var testA = 10;
+    var testB = 5;
+    $scope.tSum = testA + testB;
   };
 
   CalorieService.getAll().success(function(data) {
