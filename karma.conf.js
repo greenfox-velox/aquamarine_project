@@ -19,7 +19,7 @@ module.exports = function(config) {
       'node_modules/angular-animate/angular-animate.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'app/app.js',
-      'test/*.js'
+      'spec/*.js'
     ],
 
 
