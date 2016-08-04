@@ -11,7 +11,7 @@ function createApp(connection) {
   var bodyParser = require('body-parser');
 
   app.use(bodyParser.json());
-  app.use(express.static('../../aquamarine_project'));
+  app.use(express.static('../client'));
 
   app.get('/meals', function(req, res) {
     db.readAll(req, connection, function(err, meal) {
