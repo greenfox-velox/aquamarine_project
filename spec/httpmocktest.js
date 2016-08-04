@@ -29,6 +29,5 @@ describe('AppController', function() {
     $httpBackend.expectGET('http://localhost:3000/meals').respond(responseObject);
     createController();
     $httpBackend.flush();
-    dump($rootScope.meals);
   });
 });

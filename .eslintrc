@@ -12,6 +12,7 @@
   "globals": {
     "angular": true,
     "inject": true,
+    "dump": true,
     },
   "parser": "babel-eslint",          // https://github.com/babel/babel-eslint
   "plugins": [
