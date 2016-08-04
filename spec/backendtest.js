@@ -1,9 +1,11 @@
-var api = require('../server.js');
+var api = require('../backend/createapp.js');
 var request = require('supertest');
 var tape = require('tape');
+var mockConnection = require('./mockconnection.js')
 
-tape('Get method content type is json', function(t){
-  request(api)
+tape('Get method response status is 200, content type is json', function(t) {
+  var app = api.createApp(mockConnection.mockConnectionMoreItems);
+  request(app)
     .get('/meals')
     .expect('Content-Type', /json/)
     .expect(200)
@@ -16,9 +18,10 @@ tape('Get method content type is json', function(t){
     });
 });
 
-tape('Post method content type is json', function(t){
+tape('Post method response status is 200, content type is json', function(t) {
+  var app = api.createApp(mockConnection.mockConnectionOneItem);
   var item = { id: 400, name: 'watermelon', calories: 100, date: '2016-08-15' }
-  request(api)
+  request(app)
     .post('/meals')
     .send(item)
     .expect(200)
@@ -28,13 +31,14 @@ tape('Post method content type is json', function(t){
         t.fail();
       } else {
         t.end();
-      };
+       };
     });
 });
 
-tape('Delete method content type is json', function(t){
+tape('Delete method response status is 200, content type is json', function(t){
+  var app = api.createApp(mockConnection.mockConnectionOneItem);
   var item = { id: 400 }
-  request(api)
+  request(app)
     .delete('/meals/:id')
     .send(item)
     .expect(200)
@@ -47,17 +51,3 @@ tape('Delete method content type is json', function(t){
       };
     });
 });
-
-// tape('Delete method throws error when incorrect input type', function(t){
-//   var item = { id: '34' }
-//   request(api)
-//     .delete('/meals/:id')
-//     .send(item)
-//     .end(function(err, res) {
-//       if (err) {
-//         t.fail();
-//       } else {
-//         t.end();
-//       };
-//     });
-// });
