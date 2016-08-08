@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 var mocha = require('gulp-mocha');
 var KarmaServer = require('karma').Server;
-var browserSync = require('browser-sync');
+var browserSync = require('browser-sync').create();
   // uglify = require('gulp-uglify'),
 // var exec = require('child_process').exec;
 // sourceMaps = require('gulp-sourcemaps'),
@@ -35,7 +35,7 @@ gulp.task('karma', function(done) {
 
 
 gulp.task('style', function() {
-  gulp.src('client/**/*scss')
+  gulp.src('client/**/*scss', {base: 'client/assets/css'})
     .pipe(sass())
     .pipe(gulp.dest('client/assets/css/'));
 });
@@ -43,15 +43,23 @@ gulp.task('style', function() {
 gulp.task('sass-watch', ['style'], browserSync.reload);
 
 gulp.task('watch', function() {
-  browserSync({
+  browserSync.init({
     server: {
-      baseDir: 'client/',
+      baseDir: 'client/'
     }
   });
+
   gulp.watch('backend/*.js', ['supertest']);
   gulp.watch('client/*.js', ['karma']);
   gulp.watch('client/**/*scss', ['sass-watch']);
 });
+
+// gulp.task('browserSync', function() {
+//  browserSync.init({
+//    proxy: 'http://localhost:3000',
+//    port: 7000
+//  });
+// });
 
 // gulp.task('default', ['supertest', 'karma', 'style', 'watch']);
 gulp.task('default', ['watch']);
