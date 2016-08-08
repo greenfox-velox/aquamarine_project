@@ -13,6 +13,12 @@ function createApp(connection) {
   app.use(bodyParser.json());
   app.use(express.static('../client'));
 
+  app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
+
   app.get('/meals', function(req, res) {
     db.readAll(req, connection, function(err, meal) {
       if (err) {
