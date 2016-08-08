@@ -1,1 +1,0 @@
-var mockConnectionMoreItems={query:function(n,o){o(null,[{},{},{}])}},mockConnectionOneItem={query:function(n,o,e){e(null,[{}])}};module.exports={mockConnectionMoreItems:mockConnectionMoreItems,mockConnectionOneItem:mockConnectionOneItem};

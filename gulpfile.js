@@ -1,10 +1,11 @@
-var gulp = require('gulp'),
-sass = require('gulp-sass'),
-// sourceMaps = require('gulp-sourcemaps'),
-uglify = require('gulp-uglify'),
-mocha = require('gulp-mocha');
-var exec = require('child_process').exec;
+var gulp = require('gulp');
+var sass = require('gulp-sass');
+var mocha = require('gulp-mocha');
 var KarmaServer = require('karma').Server;
+var browserSync = require('browser-sync');
+  // uglify = require('gulp-uglify'),
+// var exec = require('child_process').exec;
+// sourceMaps = require('gulp-sourcemaps'),
 
 // gulp.task('test', function (){
 //   gulp.src('spec/*.js')
@@ -12,10 +13,10 @@ var KarmaServer = require('karma').Server;
 //     .pipe(gulp.dest('minjs'))
 // });
 //
-gulp.task('supertest', function () {
+gulp.task('supertest', function() {
   gulp.src('spec/backendtest.js')
-  .pipe(mocha())
-})
+  .pipe(mocha());
+});
 
 // gulp.task('karma', function (cb) {
 //   exec('karma start', function (err, stdout, stderr) {
@@ -25,7 +26,7 @@ gulp.task('supertest', function () {
 //   });
 // });
 
-gulp.task('karma', function (done) {
+gulp.task('karma', function(done) {
   new KarmaServer({
     configFile: __dirname + '/karma.conf.js',
     singleRun: true
@@ -33,20 +34,24 @@ gulp.task('karma', function (done) {
 });
 
 
-gulp.task('style', function () {
+gulp.task('style', function() {
   gulp.src('client/**/*scss')
     .pipe(sass())
-    .pipe(gulp.dest('css/'));
+    .pipe(gulp.dest('client/assets/css/'));
 });
+
+gulp.task('sass-watch', ['style'], browserSync.reload);
 
 gulp.task('watch', function() {
-  gulp.watch('aquamarine-project/**/*.js', ['test']);
-  gulp.watch('client/**/*scss', ['style']);
+  browserSync({
+    server: {
+      baseDir: 'client/',
+    }
+  });
+  gulp.watch('backend/*.js', ['supertest']);
+  gulp.watch('client/*.js', ['karma']);
+  gulp.watch('client/**/*scss', ['sass-watch']);
 });
 
-gulp.task('default', ['test', 'style', 'server', 'watch']);
-
-
-// git rm style.css --cached
-//gulp karma
-//aron browser
+// gulp.task('default', ['supertest', 'karma', 'style', 'watch']);
+gulp.task('default', ['watch']);
