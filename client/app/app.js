@@ -3,11 +3,7 @@ var CalorieCounter = angular.module('CalorieCounter', ['ngAnimate']);
 CalorieCounter.directive('mealTable', function() {
   return {
     restrict: 'E',
-    templateUrl: '../mealTable.html',
-    transclude: true,
-    scope: {
-      meals: '='
-    }
+    templateUrl: '../mealTable.html'
   };
 });
 
@@ -50,6 +46,7 @@ CalorieCounter.controller('AppController', function($scope, $http, CalorieServic
   $scope.deleteMeal = function(item) {
     var index = $scope.meals.indexOf(item);
     CalorieService.deleteMeal(item.id).success(function() {
+      console.log(index);
       $scope.meals.splice(index, 1);
     });
   };
