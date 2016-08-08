@@ -1,9 +1,9 @@
-var CalorieCounter = angular.module('CalorieCounter', []);
+var CalorieCounter = angular.module('CalorieCounter', ['ngAnimate']);
 
 CalorieCounter.directive('mealTable', function() {
   return {
     restrict: 'E',
-    templateUrl: '../mealtable.html',
+    templateUrl: '../mealTable.html',
     transclude: true,
     scope: {
       meals: '='
